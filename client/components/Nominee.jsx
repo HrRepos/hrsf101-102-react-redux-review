@@ -1,10 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const Nominee = ({nominee, vote}) => (
-  <div>
-    <span onClick={() => vote(nominee.name)}>✅</span>
-    { nominee.name }
-  </div>
-);
+const mapStateToProps = () => {};
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  vote: () => dispatch({type: 'VOTE', payload: ownProps.nominee.name })
+});
 
-export default Nominee;
+const Nominee = ({ nominee, vote}) => {
+  return (
+    <div>
+      <span onClick={vote}>✅</span>
+      { nominee.name }
+    </div>
+  )
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nominee);
